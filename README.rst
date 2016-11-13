@@ -157,4 +157,4 @@ External links
 
 Install for example
 -------------------
-pip install PyOpenGL PyOpenGL_accelerate
+`pip install PyOpenGL PyOpenGL_accelerate`
