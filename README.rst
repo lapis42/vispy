@@ -157,5 +157,6 @@ External links
 
 Install for example
 -------------------
-   ``pip install PyOpenGL PyOpenGL_accelerate``
-   ``conda install pyqt=4.11.4``
+``pip install PyOpenGL PyOpenGL_accelerate``
+
+``conda install pyqt=4.11.4``
