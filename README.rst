@@ -153,3 +153,8 @@ External links
    :target: https://coveralls.io/r/vispy/vispy?branch=master
 .. |Zenodo Link| image:: https://zenodo.org/badge/5822/vispy/vispy.svg
    :target: http://dx.doi.org/10.5281/zenodo.17869
+
+
+Install for example
+-------------------
+pip install PyOpenGL PyOpenGL_accelerate
