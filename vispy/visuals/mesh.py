@@ -400,4 +400,6 @@ class MeshVisual(Visual):
     def _compute_bounds(self, axis, view):
         if self._bounds is None:
             return None
+        if axis not in self._bounds:
+            return (-1,1)
         return self._bounds[axis]
