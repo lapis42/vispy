@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
-# Copyright (c) 2015, Vispy Development Team.
+# Copyright (c) Vispy Development Team. All Rights Reserved.
 # Distributed under the (new) BSD License. See LICENSE.txt for more info.
 
 # This module was taken from visvis
 """
 This module produces functionality to read and write wavefront (.OBJ) files.
-
 http://en.wikipedia.org/wiki/Wavefront_.obj_file
-
 The wavefront format is quite powerful and allows a wide variety of surfaces
 to be described.
-
 This implementation does only supports mesh stuff, so no nurbs etc. Further,
 material properties are ignored, although this might be implemented later,
-
 The classes are written with compatibility of Python3 in mind.
-
 """
 
 import numpy as np
@@ -54,9 +49,7 @@ class WavefrontReader(object):
     @classmethod
     def read(cls, fname):
         """ read(fname, fmt)
-
         This classmethod is the entry point for reading OBJ files.
-
         Parameters
         ----------
         fname : str
@@ -79,7 +72,9 @@ class WavefrontReader(object):
         # Done
         t0 = time.time()
         mesh = reader.finish()
-        logger.debug('reading mesh took ' + str(time.time() - t0) + ' seconds')
+        logger.debug('reading mesh took ' +
+                     str(time.time() - t0) +
+                     ' seconds')
         return mesh
 
     def readLine(self):
@@ -224,9 +219,9 @@ class WavefrontWriter(object):
         self._f = f
 
     @classmethod
-    def write(cls, fname, vertices, faces, normals, texcoords, name=''):
+    def write(cls, fname, vertices, faces, normals,
+              texcoords, name='', reshape_faces=True):
         """ This classmethod is the entry point for writing mesh data to OBJ.
-
         Parameters
         ----------
         fname : string
@@ -239,6 +234,9 @@ class WavefrontWriter(object):
             The texture coordinate per vertex
         name : str
             The name of the object (e.g. 'teapot')
+        reshape_faces : bool
+            Reshape the `faces` array to (Nf, 3). Set to `False`
+            if you need to write a mesh with non triangular faces.
         """
         # Open file
         fmt = op.splitext(fname)[1].lower()
@@ -249,7 +247,8 @@ class WavefrontWriter(object):
         f = opener(fname, 'wb')
         try:
             writer = WavefrontWriter(f)
-            writer.writeMesh(vertices, faces, normals, texcoords, name)
+            writer.writeMesh(vertices, faces, normals,
+                             texcoords, name, reshape_faces=reshape_faces)
         except EOFError:
             pass
         finally:
@@ -290,7 +289,8 @@ class WavefrontWriter(object):
         # Write line
         self.writeLine('%s %s' % (what, val))
 
-    def writeMesh(self, vertices, faces, normals, values, name=''):
+    def writeMesh(self, vertices, faces, normals, values,
+                  name='', reshape_faces=True):
         """ Write the given mesh instance.
         """
 
@@ -302,11 +302,17 @@ class WavefrontWriter(object):
         # Get faces and number of vertices
         if faces is None:
             faces = np.arange(len(vertices))
+            reshape_faces = True
 
-        # Reshape faces
-        Nfaces = faces.size // 3
-        faces = faces.reshape((Nfaces, 3))
-
+        if reshape_faces:
+            Nfaces = faces.size // 3
+            faces = faces.reshape((Nfaces, 3))
+        else:
+            is_triangular = np.array([len(f) == 3
+                                      for f in faces])
+            if not(np.all(is_triangular)):
+                logger.warning('''Faces doesn't appear to be triangular,
+                be advised the file cannot be read back in vispy''')
         # Number of vertices
         N = vertices.shape[0]
 

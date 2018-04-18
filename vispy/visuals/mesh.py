@@ -11,7 +11,7 @@ from __future__ import division
 
 import numpy as np
 
-from .visual import Visual
+from .visual import Visual, CompoundVisual
 from .shaders import Function, Varying
 from ..gloo import VertexBuffer, IndexBuffer
 from ..geometry import MeshData

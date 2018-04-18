@@ -71,7 +71,8 @@ class TurntableCamera(Base3DRotationCamera):
     @elevation.setter
     def elevation(self, elev):
         elev = float(elev)
-        self._elevation = min(90, max(-90, elev))
+        # self._elevation = min(90, max(-90, elev))
+        self._elevation = elev
         self.view_changed()
 
     @property
