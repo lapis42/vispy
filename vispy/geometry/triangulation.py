@@ -980,7 +980,7 @@ class Triangulation(object):
 
 
 def _triangulate_python(vertices_2d, segments):
-    segments = segments.reshape(len(segments) / 2, 2)
+    segments = segments.reshape(int(len(segments) / 2), 2)
     T = Triangulation(vertices_2d, segments)
     T.triangulate()
     vertices_2d = T.pts

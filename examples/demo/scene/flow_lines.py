@@ -97,8 +97,8 @@ class VectorFieldVisual(visuals.Visual):
                  color=(1, 1, 1, 0.3)):
         self._time = 0.0
         self._last_time = ptime.time()
-        rows = field.shape[0] / spacing
-        cols = field.shape[1] / spacing
+        rows = int(field.shape[0] / spacing)
+        cols = int(field.shape[1] / spacing)
         index = np.empty((rows * cols, segments * 2, 2), dtype=np.float32)
         
         # encodes starting position within vector field
@@ -188,7 +188,7 @@ view.camera.set_range()
 
 @canvas.connect
 def on_mouse_move(event):
-    if 3 in event.buttons:
+    if 1 in event.buttons:
         tr = canvas.scene.node_transform(vfield)
         vfield.shared_program['attractor'] = tr.map(event.pos)[:2]
 

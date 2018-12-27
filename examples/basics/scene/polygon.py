@@ -13,6 +13,8 @@ from vispy.scene import SceneCanvas
 from vispy.scene.visuals import Polygon, Ellipse, Rectangle, RegularPolygon
 from vispy.color import Color
 
+
+
 white = Color("#ecf0f1")
 gray = Color("#121212")
 red = Color("#e74c3c")
@@ -25,24 +27,34 @@ v = canvas.central_widget.add_view()
 v.bgcolor = gray
 v.camera = 'panzoom'
 
-cx, cy = (0.2, 0.2)
+cx0, cy0 = (0.2, 0.2)
+cx1, cy1 = (0.2, 0.6)
 halfx, halfy = (0.1, 0.1)
 
-poly_coords = [(cx - halfx, cy - halfy),
-               (cx + halfx, cy - halfy),
-               (cx + halfx, cy + halfy),
-               (cx - halfx, cy + halfy)]
+poly_coords = [(cx0 - halfx, cy0 - halfy),
+               (cx0 + halfx, cy0 - halfy),
+               (cx0 + halfx, cy0 + halfy),
+               (cx0 - halfx, cy0 + halfy),
+
+               (cx1 - halfx, cy1 - halfy),
+               (cx1 + halfx, cy1 - halfy),
+               (cx1 + halfx, cy1 + halfy),
+               (cx1 - halfx, cy1 + halfy)]
+
+
 poly = Polygon(poly_coords, color=red, border_color=white,
                border_width=3,  parent=v.scene)
 
-ellipse = Ellipse(center=(0.4, 0.2), radius=(0.1, 0.05),
-                  color=blue, border_width=2, border_color=white,
-                  num_segments=1,
-                  parent=v.scene)
+ellipse = Ellipse(border_width=1, border_color=(1,1,1,1), parent=v.scene)
 
-ellipse.num_segments = 10
+ellipse.center=(0.4, 0.6)
+ellipse.radius = (0.1, 0.05)
+ellipse.color = (1,1,1,0.1)
+# ellipse.border_width = 1
+# ellipse.border_color = (1,1,1,1)
+ellipse.num_segments = 20
 ellipse.start_angle = 0
-ellipse.span_angle = 120
+ellipse.span_angle = 360
 
 rect = Rectangle(center=(0.6, 0.2), width=0.1, height=0.2,
                  color=orange, border_color=white,

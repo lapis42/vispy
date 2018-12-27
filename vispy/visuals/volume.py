@@ -394,7 +394,7 @@ class VolumeVisual(Visual):
         but has lower performance on desktop platforms.
     """
 
-    def __init__(self, vol, clim=None, method='mip', threshold=None, 
+    def __init__(self, vol=None, clim=None, method='mip', threshold=None, 
                  relative_step_size=0.8, cmap='grays',
                  emulate_texture=False):
         
@@ -438,12 +438,14 @@ class VolumeVisual(Visual):
         self.set_gl_state('translucent', cull_face=False)
         
         # Set data
-        self.set_data(vol, clim)
-        
+        if vol is not None:
+            self.set_data(vol, clim)
+            self.threshold = threshold if (threshold is not None) else vol.mean()
+            
         # Set params
         self.method = method
         self.relative_step_size = relative_step_size
-        self.threshold = threshold if (threshold is not None) else vol.mean()
+        # self.threshold = threshold if (threshold is not None) else vol.mean()
         self.freeze()
     
     def set_data(self, vol, clim=None):
