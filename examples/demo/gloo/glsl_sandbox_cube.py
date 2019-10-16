@@ -12,7 +12,7 @@ from vispy.util.transforms import perspective, translate, rotate
 
 # Force using qt and take QtCore+QtGui from backend module
 try:
-    app_object = app.use_app('pyqt4')
+    app_object = app.use_app('pyqt5')
 except Exception:
     app_object = app.use_app('pyside')
 QtCore = app_object.backend_module.QtCore,
