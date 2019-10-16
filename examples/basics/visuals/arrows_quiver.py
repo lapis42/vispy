@@ -76,7 +76,7 @@ class Canvas(app.Canvas):
 
         self.visual.set_data(
             pos=vertices,
-            arrows=vertices.reshape((len(vertices)/2, 4)),
+            arrows=vertices.reshape((len(vertices)//2, 4)),
         )
 
     def on_mouse_move(self, event):
