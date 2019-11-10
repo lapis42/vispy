@@ -8,6 +8,7 @@ doc/_build
 /_gh-pages
 /_images
 /_demo-data
+.vscode
 .idea
 build
 dist
