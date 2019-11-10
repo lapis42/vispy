@@ -77,6 +77,9 @@ void main()
         // out of the marker (beyond the outer edge of the edge
         // including transition zone due to antialiasing)
         discard;
+        // float alpha = r/4;
+        // alpha = exp(-alpha*alpha);
+        // gl_FragColor = vec4(edgecolor.rgb, alpha);        
     }
     else if (d < 0.0)
     {
@@ -499,7 +502,7 @@ class MarkersVisual(Visual):
             self.set_data(**kwargs)
         self.freeze()
 
-    def set_data(self, pos=None, symbol='o', size=10., edge_width=1.,
+    def set_data(self, pos=None, symbol='o', size=10., edge_width=1,
                  edge_width_rel=None, edge_color='black', face_color='white',
                  scaling=False):
         """ Set the data used to display this visual.
