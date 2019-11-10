@@ -64,10 +64,10 @@ class LinePlotVisual(CompoundVisual):
         self._line = LineVisual(method='gl', antialias=False)
         self._markers = MarkersVisual()
         CompoundVisual.__init__(self, [self._line, self._markers])
-        self.set_data(data, color=color, symbol=symbol,
-                      width=width, marker_size=marker_size,
-                      edge_color=edge_color, face_color=face_color,
-                      edge_width=edge_width, connect=connect)
+        # self.set_data(data, color=color, symbol=symbol,
+        #               width=width, marker_size=marker_size,
+        #               edge_color=edge_color, face_color=face_color,
+        #               edge_width=edge_width, connect=connect)
 
     def set_data(self, data=None, **kwargs):
         """Set the line data
