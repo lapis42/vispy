@@ -294,7 +294,7 @@ class FlyCamera(PerspectiveCamera):
 
         # Calculate auto-roll
         if self.auto_roll:
-            up = {'x': (1, 0, 0), 'y': (0, 1, 0), 'z': (0, 0, 1)}[self.up[1]]
+            up = {'x': (1, 0, 0), 'y': (0, 1, 0), 'z': (0, 0, -1)}[self.up[1]]
             up = np.array(up) * {'+': +1, '-': -1}[self.up[0]]
 
             def angle(p1, p2):
