@@ -232,7 +232,7 @@ class Canvas(object):
 
     def _set_keys(self, keys):
         if keys is not None:
-            if isinstance(keys, string_types):
+            if isinstance(keys, str):
                 if keys != 'interactive':
                     raise ValueError('keys, if string, must be "interactive", '
                                      'not %s' % (keys,))
@@ -245,9 +245,10 @@ class Canvas(object):
         if not isinstance(keys, dict):
             raise TypeError('keys must be a dict, str, or None')
         if len(keys) > 0:
+            lower_keys = {}
             # ensure all are callable
             for key, val in keys.items():
-                if isinstance(val, string_types):
+                if isinstance(val, str):
                     new_val = getattr(self, val, None)
                     if new_val is None:
                         raise ValueError('value %s is not an attribute of '
@@ -256,9 +257,8 @@ class Canvas(object):
                 if not hasattr(val, '__call__'):
                     raise TypeError('Entry for key %s is not callable' % key)
                 # convert to lower-case representation
-                keys.pop(key)
-                keys[key.lower()] = val
-            self._keys_check = keys
+                lower_keys[key.lower()] = val
+            self._keys_check = lower_keys
 
             def keys_check(event):
                 if event.key is not None:
