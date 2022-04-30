@@ -238,9 +238,10 @@ def _fetch_file(url, file_name, print_destination=True):
         try:
             data = urllib.request.urlopen(url, timeout=15.)
         except Exception as e:
-            if ii == n_try - 1:
-                raise RuntimeError('Error while fetching file %s.\n'
-                                   'Dataset fetching aborted (%s)' % (url, e))
+            # if ii == n_try - 1:
+            #     raise RuntimeError('Error while fetching file %s.\n'
+            #                        'Dataset fetching aborted (%s)' % (url, e))
+            pass
     try:
         file_size = int(data.headers['Content-Length'].strip())
         print('Downloading data from %s (%s)' % (url, sizeof_fmt(file_size)))
@@ -253,8 +254,9 @@ def _fetch_file(url, file_name, print_destination=True):
         if print_destination is True:
             sys.stdout.write('File saved as %s.\n' % file_name)
     except Exception as e:
-        raise RuntimeError('Error while fetching file %s.\n'
-                           'Dataset fetching aborted (%s)' % (url, e))
+        # raise RuntimeError('Error while fetching file %s.\n'
+        #                    'Dataset fetching aborted (%s)' % (url, e))
+        pass
     finally:
         if local_file is not None:
             if not local_file.closed:
