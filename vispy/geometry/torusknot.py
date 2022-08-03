@@ -1,7 +1,10 @@
 from __future__ import division
 
 import numpy as np
-from fractions import gcd
+try:
+    from fractions import gcd
+except:
+    from math import gcd
 
 
 class TorusKnot(object):
