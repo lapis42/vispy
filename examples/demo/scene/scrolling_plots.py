@@ -26,8 +26,8 @@ grid.add_widget(xax, 1, 1)
 xax.link_view(view)
 
 
-N = 10000
-M = 2000
+N = 1000
+M = 200
 cols = int(N**0.5)
 view.camera.rect = (0, 0, cols, N/cols)
 

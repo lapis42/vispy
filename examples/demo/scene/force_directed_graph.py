@@ -15,7 +15,7 @@ ngroups = 16
 np.random.seed(127396)
 # pos = np.empty((npts, 2), dtype='float32')
 pos = np.arange(npts*2).reshape(-1,2).astype(np.float32)
-print pos
+print(pos)
 texts = [str(i) for i in range(len(pos))] 
 colors = np.empty((npts, 3), dtype='float32')
 edges = np.empty((nedges, 2), dtype='uint32')

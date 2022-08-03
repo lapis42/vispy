@@ -98,6 +98,7 @@ class ScrollingLinesVisual(Visual):
         if pos_offset is None:
             # construct positions as a grid 
             rows = np.ceil(n_lines / columns)
+            rows, columns = int(rows), int(columns)
             pos_offset = np.empty((rows, columns, 3), dtype='float32')
             pos_offset[..., 0] = (np.arange(columns)[np.newaxis, :] * 
                                   cell_size[0])
